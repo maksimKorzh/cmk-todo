@@ -12,7 +12,12 @@ router.use(bodyParser.json());
 // Init database hook
 const mongoose = require('mongoose');
 const uri = "mongodb+srv://cmk:342124@todolist-c483l.gcp.mongodb.net/todolist?retryWrites=true";
-mongoose.connect(uri, { useNewUrlParser: true });
+var connectionStatus = mongoose.connect(uri, { useNewUrlParser: true }, (err) => {
+  if(err){
+    throw err;
+  }
+  console.log("Connected to database successfully!");
+});
 const db = mongoose.connection;
 
 // Get home page
